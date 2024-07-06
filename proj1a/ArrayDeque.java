@@ -58,7 +58,7 @@ public class ArrayDeque<T> {
         if (size == array.length) {
             resize(size * 2);
         }
-        array[nextfirst] = item;
+        array[plus1(nextfirst)] = item;
         nextfirst = minus1(nextfirst);
         size++;
         usage_ratio = (double) size / (double) array.length;
@@ -68,7 +68,7 @@ public class ArrayDeque<T> {
         if (size == array.length) {
             resize(size * 2);
         }
-        array[nextlast] = item;
+        array[minus1(nextlast)] = item;
         nextlast = plus1(nextlast);
         size++;
         usage_ratio = (double) size / (double) array.length;

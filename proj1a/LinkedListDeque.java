@@ -3,9 +3,9 @@ public class LinkedListDeque<T> {
     private node sentinel;
 
     private class node {
-        public node pre;
-        public T item;
-        public node next;
+        private node pre;
+        private T item;
+        private node next;
 
         public node(node ppre, T iitem, node nnext) {
             pre = ppre;
