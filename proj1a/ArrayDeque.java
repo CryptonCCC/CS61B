@@ -35,7 +35,11 @@ public class ArrayDeque<T> {
         if (i < 0 || i >= size) {
             return null;
         }
-        return array[plus1(i)];
+        int p = plus1(nextfirst);
+        for (int j = 0; j < i; j++) {
+            p = plus1(p);
+        }
+        return array[p];
     }
 
     private void resize(int newSize) {
@@ -92,7 +96,7 @@ public class ArrayDeque<T> {
         size--;
         usage_ratio = (double) size / (double) array.length;
         if (usage_ratio <= 0.25 && array.length >= 16) {
-            resize(size / 2);
+            resize(array.length / 2);
         }
         return ret;
     }
@@ -107,7 +111,7 @@ public class ArrayDeque<T> {
         size--;
         usage_ratio = (double) size / (double) array.length;
         if (usage_ratio <= 0.25 && array.length >= 16) {
-            resize(size / 2);
+            resize(array.length / 2);
         }
         return ret;
     }
