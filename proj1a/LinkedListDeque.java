@@ -79,7 +79,7 @@ public class LinkedListDeque<T> {
             return null;
         }
         node p = sentinel;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i <= index; i++) {
             p = p.next;
         }
         return p.item;
