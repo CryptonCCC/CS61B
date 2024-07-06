@@ -13,7 +13,10 @@ public class ArrayDeque<T> {
     }
 
     private int plus1(int i) {
-        return (i + 1) % array.length;
+        if (i == array.length - 1) {
+            return 0;
+        }
+        return i + 1;
     }
 
     private int minus1(int i) {
@@ -32,7 +35,7 @@ public class ArrayDeque<T> {
         if (i < 0 || i >= size) {
             return null;
         }
-        return array[(plus1(nextfirst) + i) % array.length];
+        return array[plus1(i)];
     }
 
     private void resize(int newSize) {
@@ -88,7 +91,7 @@ public class ArrayDeque<T> {
         nextfirst = plus1(nextfirst);
         size--;
         usage_ratio = (double) size / (double) array.length;
-        if (usage_ratio < 0.25 && array.length >= 16) {
+        if (usage_ratio <= 0.25 && array.length >= 16) {
             resize(size / 2);
         }
         return ret;
@@ -103,7 +106,7 @@ public class ArrayDeque<T> {
         nextlast = minus1(nextlast);
         size--;
         usage_ratio = (double) size / (double) array.length;
-        if (usage_ratio < 0.25 && array.length >= 16) {
+        if (usage_ratio <= 0.25 && array.length >= 16) {
             resize(size / 2);
         }
         return ret;
