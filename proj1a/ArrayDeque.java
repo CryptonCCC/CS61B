@@ -17,7 +17,10 @@ public class ArrayDeque<T> {
     }
 
     private int minus1(int i) {
-        return (i - 1) % array.length;
+        if (i == 0) {
+            return array.length - 1;
+        }
+        return i - 1;
     }
 
 
@@ -34,11 +37,13 @@ public class ArrayDeque<T> {
 
     private void resize(int newSize) {
         T[] newarray = (T[]) new Object[newSize];
+        int p = plus1(nextfirst);
         for (int i = 0; i < size; i++) {
-            newarray[i] = array[(plus1(nextfirst) + i) % array.length];
+            newarray[i] = array[p];
+            p = plus1(p);
         }
-        nextfirst = 0;
-        nextlast = size - 1;
+        nextfirst = newSize - 1;
+        nextlast = size;
         array = newarray;
     }
 
@@ -47,10 +52,10 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
+        int p = plus1(nextfirst);
         for (int i = 0; i < size; i++) {
-            int p = plus1(nextfirst);
             System.out.print(array[p] + " ");
-            plus1(p);
+            p = plus1(p);
         }
     }
 
@@ -58,7 +63,7 @@ public class ArrayDeque<T> {
         if (size == array.length) {
             resize(size * 2);
         }
-        array[plus1(nextfirst)] = item;
+        array[nextfirst] = item;
         nextfirst = minus1(nextfirst);
         size++;
         usage_ratio = (double) size / (double) array.length;
@@ -68,7 +73,7 @@ public class ArrayDeque<T> {
         if (size == array.length) {
             resize(size * 2);
         }
-        array[minus1(nextlast)] = item;
+        array[nextlast] = item;
         nextlast = plus1(nextlast);
         size++;
         usage_ratio = (double) size / (double) array.length;
