@@ -8,12 +8,14 @@ public class PercolationStats {
     private int T;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
-        if (N <= 0 || T <= 0) throw new IllegalArgumentException();
+        if (N <= 0 || T <= 0) {
+            throw new IllegalArgumentException();
+        }
 
         thresholds = new double[T];
         this.T = T;
-        
-        for (int t = 1; t <= T; t++) {
+
+        for (int t = 0; t < T; t++) {
             Percolation p = pf.make(N);
             while (!p.percolates()) {
                 int row = StdRandom.uniform(N);

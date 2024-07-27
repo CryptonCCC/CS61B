@@ -1,6 +1,5 @@
 package hw2;
 
-import edu.princeton.cs.algs4.UF;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -39,6 +38,10 @@ public class Percolation {
     private int[] neighbor(int x, int y) {
         if (x < 0 || x >= size || y < 0 || y >= size) {
             throw new java.lang.IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (size <= 1) {
+            return null;
         }
 
         int upperNeighbor = xyToInt(x - 1, y);
@@ -86,6 +89,10 @@ public class Percolation {
         }
 
         int[] neighbors = neighbor(row, col);
+        if (neighbors == null) {
+            return;
+        }
+
         for (int neighbor : neighbors) {
             int neighborRow = neighbor / size;
             int neighborCol = neighbor % size;
