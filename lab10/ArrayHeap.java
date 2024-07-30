@@ -186,11 +186,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
         T min = contents[1].item();
         swap(1, size);
-        contents[size] = null;
         size--;
-        if (size != 0) {
-            sink(1);
-        }
+        sink(1);
+        contents[size + 1] = null;
         return min;
     }
 
@@ -218,6 +216,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         if (itemIndex == -1) {
             return;
         }
+        contents[itemIndex].myPriority = priority;
         swim(itemIndex);
         sink(itemIndex);
     }
