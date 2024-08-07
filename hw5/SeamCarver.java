@@ -9,7 +9,7 @@ public class SeamCarver {
     private double[][] energyMatrix;
 
     public SeamCarver(Picture picture) {
-        this.picture = picture;
+        this.picture = new Picture(picture);
         width = picture().width();
         height = picture.height();
         energyMatrix = new double[width][height];
@@ -23,7 +23,7 @@ public class SeamCarver {
 
     // current picture
     public Picture picture() {
-        return picture;
+        return new Picture(picture);
     }
 
     // width of current picture
@@ -118,15 +118,15 @@ public class SeamCarver {
                 //border case
                 if (i == 0) {
                     M[i][j] = energyMatrix[i][j] + Math.min(M[i][j - 1], M[i + 1][j - 1]);
-                    edgeTo[i][j] = M[i][j - 1] > M [i + 1][j - 1] ?
-                            i + 1 : i;
+                    edgeTo[i][j] = M[i][j - 1] > M [i + 1][j - 1]
+                            ? i + 1 : i;
                 } else if (i == width - 1) {
                     M[i][j] = energyMatrix[i][j] + Math.min(M[i - 1][j - 1], M[i][j - 1]);
-                    edgeTo[i][j] = M[i - 1][j - 1] > M[i][j - 1] ?
-                            i : i - 1;
+                    edgeTo[i][j] = M[i - 1][j - 1] > M[i][j - 1]
+                            ? i : i - 1;
                 } else {
                     int minVertices = i - 1;
-                    for (int k = 0; k < 2; k++){
+                    for (int k = 0; k < 2; k++) {
                         if (M[minVertices][j - 1] > M[i + k][j - 1]) {
                             minVertices = i + k;
                         }
