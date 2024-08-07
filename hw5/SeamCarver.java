@@ -116,14 +116,16 @@ public class SeamCarver {
 
 
                 //border case
+                int upLeft = Math.floorMod(i - 1, width);
+                int upRight = Math.floorMod(i + 1, width);
                 if (i == 0) {
-                    M[i][j] = energyMatrix[i][j] + Math.min(M[i][j - 1], M[i + 1][j - 1]);
-                    edgeTo[i][j] = M[i][j - 1] > M [i + 1][j - 1]
-                            ? i + 1 : i;
+                    M[i][j] = energyMatrix[i][j] + Math.min(M[i][j - 1], M[upRight][j - 1]);
+                    edgeTo[i][j] = M[i][j - 1] > M [upRight][j - 1]
+                            ? upRight : i;
                 } else if (i == width - 1) {
-                    M[i][j] = energyMatrix[i][j] + Math.min(M[i - 1][j - 1], M[i][j - 1]);
-                    edgeTo[i][j] = M[i - 1][j - 1] > M[i][j - 1]
-                            ? i : i - 1;
+                    M[i][j] = energyMatrix[i][j] + Math.min(M[upLeft][j - 1], M[i][j - 1]);
+                    edgeTo[i][j] = M[upLeft][j - 1] > M[i][j - 1]
+                            ? i : upLeft;
                 } else {
                     int minVertices = i - 1;
                     for (int k = 0; k < 2; k++) {
